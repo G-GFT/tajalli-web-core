@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*?*search=*
+Allow: /
+Allow: /style.css
+Allow: /script.js
+
+Sitemap: https://www.g7gft.com/sitemap.xml
