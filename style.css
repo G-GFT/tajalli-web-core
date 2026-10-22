@@ -446,3 +446,57 @@ body {
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.8; transform: scale(0.98); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
 }
+/* ============ خلفية الفوتر الفخمة (صورة الكعبة) ============ */
+.site-footer {
+    position: relative;
+    margin-top: 100px;
+    padding: 60px 20px 40px;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    text-align: center;
+    color: #aaa;
+    font-size: 0.9rem;
+    overflow: hidden; /* لمنع خروج الصورة عن الإطار */
+    background: #0a0e17;
+}
+
+/* وضع الصورة كخلفية سفلية مع تلاشي تدريجي */
+.site-footer::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 100%;
+    background-image: url('footer-bg.png');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    opacity: 0.35; /* شفافية الصورة لتكون مريحة للعين */
+    z-index: 0;
+    /* تلاشي الصورة من الأعلى للأسفل */
+    mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
+}
+
+/* لضمان ظهور النصوص فوق الصورة */
+.site-footer > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* تنسيق خاص للبيانات القانونية لتظهر كبطاقة زجاجية فخمة فوق الصورة */
+.legal-info {
+    margin: 0 auto 20px;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: #ddd;
+    max-width: 800px;
+    padding: 15px 20px;
+    background: rgba(10, 14, 23, 0.7); /* خلفية داكنة شفافة */
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    backdrop-filter: blur(5px); /* تأثير زجاجي */
+    -webkit-backdrop-filter: blur(5px);
+}
+.legal-info strong {
+    color: var(--gold-main);
+    font-size: 1rem;
+}
