@@ -5,5 +5,8 @@ Disallow: /*?*search=*
 Allow: /
 Allow: /style.css
 Allow: /script.js
+Allow: /stars.js
+Allow: /i18n.js
+Allow: /app.js
 
 Sitemap: https://www.g7gft.com/sitemap.xml

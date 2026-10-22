@@ -3,94 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- === درع الحماية ضد الحقن والتتبع (Security Headers via Meta) === -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com;">
-<meta http-equiv="X-Frame-Options" content="DENY"> <!-- يمنع وضع موقعك داخل إطار iframe لسرقة النقرات -->
-<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin"> <!-- يخفي مصدر الرابط الكامل لحماية خصوصية الزائر -->
-<meta name="theme-color" content="#0a0e17"> <!-- لون الشريط العلوي للمتصفح ليتطابق مع الهوية الداكنة -->
-<link rel="canonical" href="https://www.g7gft.com/"> <!-- يخبر جوجل أن هذا هو المصدر الرسمي الوحيد -->
-    <title>تجلي بلس | Tajalli Plus - The Global Islamic Clock</title>
-    <meta name="description" content="تطبيق تجلي بلس للساعة الإسلامية العالمية. دقة، هوية روحية، وتجربة ملكية.">
-    <!-- ربط خط Cairo الجميل -->
+    
+    <!-- سياسة الحماية (CSP) - تم تعديلها للسماح بجلب ملفات JSON محلياً -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self';">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#0a0e17">
+    <link rel="canonical" href="https://www.g7gft.com/">
+    
+    <title id="pageTitle">تجلي بلس | Tajalli Plus</title>
+    <meta name="description" id="pageDesc" content="تطبيق تجلي بلس للساعة الإسلامية العالمية.">
+    
+    <!-- خط Cairo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
     
-    <!-- ربط ملف التنسيق (CSS) -->
+    <!-- ملف التنسيق -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- الخلفية المتحركة (نجوم ودوران) -->
-    <div class="bg-stars"></div>
-    <div class="bg-globe-spin"></div>
+    <!-- ===== شاشة البداية (Splash) ===== -->
+    <div id="splashScreen" class="splash-screen" aria-hidden="true">
+        <div class="splash-kaaba"></div>
+        <div class="splash-logo">
+            <span class="splash-arabic">تَجَلِّي</span>
+            <span class="splash-latin">TAJALLI PLUS</span>
+        </div>
+        <div class="splash-loader"><span></span><span></span><span></span></div>
+    </div>
 
-    <!-- الحاوية الرئيسية -->
+    <!-- ===== الخلفيات ===== -->
+    <canvas id="starfield"></canvas>
+    <div class="bg-globe-spin"></div>
+    <div class="bg-golden-glow"></div>
+
     <main class="container">
         
-        <!-- الهيدر البسيط والنظيف -->
+        <!-- الهيدر -->
         <header class="site-header">
             <div class="logo-area">
-                <h1 class="brand-name gold-text">تَجَلِّي بَلس</h1>
-                <span class="tagline muted-text">رؤية إسلامية عالمية</span>
+                <h1 class="brand-name gold-text translatable" data-key="hero_title">تَجَلِّي بَلس</h1>
+                <span class="tagline muted-text translatable" data-key="slogan">رؤية إسلامية عالمية</span>
             </div>
+            
+            <!-- نظام اللغات الذكي -->
+            <div class="language-selector-wrapper">
+                <button id="langToggleBtn" class="lang-btn-active" aria-label="Select Language">
+                    🌍 <span id="currentLangCode">AR</span> ▾
+                </button>
+                <div id="langDropdown" class="lang-dropdown hidden">
+                    <a href="#" data-lang="ar" class="active">🇪🇬 العربية</a>
+                    <a href="#" data-lang="en">🇺🇸 English</a>
+                    <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+                    <a href="#" data-lang="fr">🇫🇷 Français</a>
+                    <a href="#" data-lang="de">🇩🇪 Deutsch</a>
+                    <a href="#" data-lang="ru">🇷🇺 Русский</a>
+                    <a href="#" data-lang="hi">🇮🇳 हिन्दी</a>
+                </div>
+            </div>
+
             <nav class="simple-nav">
-                <a href="#features">المميزات</a>
-                <a href="#download">التحميل</a>
-                <a href="#contact">تواصل معنا</a>
+                <a href="#features" class="translatable" data-key="nav_features">المميزات</a>
+                <a href="#download" class="translatable" data-key="nav_download">التحميل</a>
+                <a href="#contact" class="translatable" data-key="nav_contact">تواصل معنا</a>
             </nav>
         </header>
 
-        <!-- القسم البطولي (Hero Section) - قلب الموقع -->
+        <!-- القسم البطولي -->
         <section id="hero" class="hero-section">
-            <h2 class="hero-title white-text">النسخة المتكاملة من<br><span class="gold-highlight">الساعة الإسلامية العالمية</span></h2>
-            <p class="hero-desc light-gray-text">
-                بهوية ملكية ذهبية، وتجربة روحانية فريدة مستوحاة من عظمة الكعبة المشرفة. 
-                دقة عالية، تصميم فاخر، ودعم مستمر لأمتنا.
+            <h2 class="hero-title white-text">
+                <span class="translatable" data-key="hero_subtitle">النسخة المتكاملة من</span><br>
+                <span class="gold-highlight translatable" data-key="hero_highlight_part">الساعة الإسلامية العالمية</span>
+            </h2>
+            <p class="hero-desc light-gray-text translatable" data-key="hero_desc">
+                بهوية ملكية ذهبية، وتجربة روحانية فريدة مستوحاة من عظمة الكعبة المشرفة.
             </p>
             
             <div class="cta-buttons">
-                <a href="https://play.google.com/store/apps/details?id=com.g7gft.tajalli" target="_blank" class="btn-primary">
-                    تحميل من Google Play
+                <a href="https://play.google.com/store/apps/testing?id=com.g7gft.tajalli&hl=en-US" 
+                   target="_blank" rel="noopener" class="btn-primary translatable" data-key="btn_play">
+                    تحميل النسخة التجريبية (Beta)
                 </a>
-                <a href="#community" class="btn-secondary">
+                <a href="#community" class="btn-secondary translatable" data-key="btn_community">
                     انضم للمجتمع
                 </a>
             </div>
         </section>
 
-        <!-- قسم المميزات (Features Grid) -->
+        <!-- المميزات -->
         <section id="features" class="features-grid">
             <div class="feature-card glass-effect">
                 <div class="icon">🕌</div>
-                <h3>دقة المواقيت</h3>
-                <p>حسابات فلكية متقدمة لمواقيت الصلاة حول العالم.</p>
+                <h3 class="translatable" data-key="f1t">دقة المواقيت</h3>
+                <p class="translatable" data-key="f1d">حسابات فلكية متقدمة.</p>
             </div>
             <div class="feature-card glass-effect">
                 <div class="icon">✨</div>
-                <h3>هوية بصرية فاخرة</h3>
-                <p>تصميم ذهبي أسود يمنحك تجربة قراءة مريحة ومهيبة.</p>
+                <h3 class="translatable" data-key="f2t">هوية بصرية فاخرة</h3>
+                <p class="translatable" data-key="f2d">تصميم ذهبي أسود.</p>
             </div>
             <div class="feature-card glass-effect">
                 <div class="icon">🌍</div>
-                <h3>7 لغات عالمية</h3>
-                <p>متاح بالعربية، الإنجليزية، التركية، وغيرها لخدمة الأمة.</p>
+                <h3 class="translatable" data-key="f3t">7 لغات عالمية</h3>
+                <p class="translatable" data-key="f3d">لخدمة الأمة.</p>
             </div>
         </section>
 
-        <!-- الفوتر (Footer) -->
+        <!-- الفوتر -->
         <footer id="contact" class="site-footer">
-            <p>&copy; 2026 Tajalli Plus & G-GFT Project. All Rights Reserved.</p>
+            <p class="translatable" data-key="footer_slogan">بوابة إيمانية وتقنية لعالم أوسع</p>
+            <p>&copy; 2026 Tajalli Plus &amp; G-GFT Project. All Rights Reserved.</p>
             <div class="social-links">
-                <a href="#" aria-label="Twitter">𝕏</a>
-                <a href="#" aria-label="YouTube">▶</a>
-                <a href="#" aria-label="Telegram">✈</a>
+                <a href="https://whatsapp.com/channel/0029Vaz7I1f4SpkEsAXuGG2p" target="_blank" rel="noopener" title="WhatsApp">
+                    ✈ <span class="translatable" data-key="footer_whatsapp_label">قناة واتساب</span>
+                </a>
+                <a href="https://www.youtube.com/@G-GFT" target="_blank" rel="noopener" title="YouTube">
+                    ▶ <span class="translatable" data-key="footer_youtube_label">يوتيوب الرسمي</span>
+                </a>
+                <a href="mailto:god.gifts.sky@gmail.com" title="Email">
+                    ✉ <span class="translatable" data-key="footer_email_label">راسلنا</span>
+                </a>
             </div>
         </footer>
 
     </main>
 
-    <!-- ربط سكربت الحركة البسيطة -->
+    <!-- السكربتات -->
+    <script src="app.js"></script>
+    <script src="stars.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
