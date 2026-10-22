@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecelli — Özel Takdim</title>
+    <meta name="description" content="Tecelli İslam Saati — Cumhurbaşkanlığı Takdim Sürümü">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============ إعدادات عامة ============ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0a0e17;
+            color: #f5f5dc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            /* الخلفية الرئاسية الفخمة */
+            background-image: url('presidential-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* طبقة تعتيم لضمان وضوح النص */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 14, 23, 0.85); /* تعتيم داكن */
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ============ الشعار والنص ============ */
+        .logo-area {
+            margin-bottom: 40px;
+            animation: fadeInDown 1.5s ease-out;
+        }
+        .logo-area img {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+            margin-bottom: 20px;
+        }
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #d4af37;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #aaaacc;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* ============ الأزرار ============ */
+        .buttons-wrapper {
+            display: flex; flex-direction: column; gap: 15px;
+            width: 100%; max-width: 500px;
+            margin-top: 30px;
+        }
+        .btn {
+            display: block;
+            padding: 15px 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background: #d4af37;
+            color: #000;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+        }
+
+        /* ============ صندوق التحقق ============ */
+        .verification-box {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #aaa;
+            word-break: break-all;
+            font-family: monospace;
+            max-width: 100%;
+            text-align: left;
+        }
+
+        /* ============ الفوتر المخصص ============ */
+        footer {
+            background: rgba(10, 14, 23, 0.95);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: auto;
+            backdrop-filter: blur(10px);
+        }
+        .footer-content {
+            max-width: 1000px; margin: 0 auto;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .footer-content p { margin: 0; line-height: 1.6; }
+        .footer-content strong { color: #d4af37; }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- الشعار (يمكنك استبدال الرابط بصورة شعارك الحقيقية) -->
+        <div class="logo-area">
+            <!-- صورة الشعار (يفضل وضعها في نفس المجلد أو رابط مباشر) -->
+            <img src="https://g7gft.com/assets/logo.png" alt="Tecelli Logo" onerror="this.style.display='none'">
+            <h1 class="main-title">TECELLİ — İSLAM SAATİ</h1>
+            <p class="subtitle">ساعة تجلّي الإسلامية — نسخة الإهداء الرئاسية</p>
+        </div>
+
+        <div class="buttons-wrapper">
+            <a href="#" class="btn">🇹🇷 Cumhurbaşkanlığı Sürümü (APK — 118.8MB)</a>
+            <a href="#" class="btn">📄 Takdim Mektubu (TR/AR)</a>
+        </div>
+
+        <div class="verification-box">
+            <strong>Doğrulama Kodu / رمز التحقق:</strong><br>
+            SHA-256: eabf45a64ecf65a4e19043a90c8a7c44ab522caca7a68a122d99f3c261
+        </div>
+
+        <div style="margin-top: 30px; font-style: italic; color: #aaa;">
+            <p>Bir oğulun babasına takdimidir | من ابنٍ إلى أبيه</p>
+            <p>Bu belge, bir oğulun babasına takdiminin mührüdür | هذه الوثيقة مختومة بمهر ابنٍ لأبيه</p>
+            <p style="margin-top: 10px; color: #d4af37;">Elsayed Ibrahim Elsayed Hamouda — Port Fouad, Mısır | السيد إبراهيم السيد حمودة — بورفؤاد، مصر</p>
+        </div>
+    </div>
+
+    <!-- الفوتر المخصص (كما في صورتك الأخيرة) -->
+    <footer>
+        <div class="footer-content">
+            <p><strong>Imparator Group Dış Ticaret Limited Şirketi</strong></p>
+            <p>Adres: Abdurrahman Yagkent Mah. 2011. Sokak No:1 A7 Blok D:69, Esenyurt/İstanbul, Türkiye</p>
+            <p>Tel: 00905440135158 | Web: www.g7gft.com</p>
+            <p style="margin-top: 15px;">&copy; 2026 Tajalli Plus &amp; G-GFT Project. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
