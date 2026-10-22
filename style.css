@@ -339,3 +339,78 @@ body {
     .brand-name { font-size: 1.4rem; }
     .hero-title { font-size: 1.7rem; }
 }
+/* ============ تأثير الكرة الأرضية المجسمة ============ */
+.bg-clock-globe-wrapper {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70vmin; height: 70vmin;
+    z-index: -1;
+    pointer-events: none;
+    perspective: 1000px; /* لإعطاء عمق 3D */
+    opacity: 0.25; /* شفافية */
+}
+
+.bg-clock-globe {
+    width: 100%; height: 100%;
+    border-radius: 50%; /* هذا هو السر الذي يجعله مكوراً */
+    background-image: url('globe-map.png');
+    background-size: cover;
+    background-position: center;
+    
+    /* إضاءة من الخارج لتعطي شكل كرة مجسمة */
+    box-shadow: 
+        inset -20px 0 50px rgba(0,0,0,0.9), /* ظل داخلي من اليمين */
+        inset 20px 0 50px rgba(212, 175, 55, 0.2), /* إضاءة ذهبية من اليسار */
+        0 0 50px rgba(212, 175, 55, 0.1);
+    
+    /* حركة الدوران */
+    animation: spinGlobe 40s linear infinite;
+}
+
+/* حركة الدوران 3D */
+@keyframes spinGlobe {
+    0% { background-position: 0% center; }
+    100% { background-position: 400% center; } 
+    /* بدلاً من تحريك العنصر (الذي يفقده شكله)، نحرك الخلفية داخله لتبدو كأنها تدور */
+}
+
+/* حلقة الساعة الذهبية حول الكرة */
+.bg-clock-globe::after {
+    content: '';
+    position: absolute;
+    top: -5%; left: -5%;
+    width: 110%; height: 110%;
+    border-radius: 50%;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    /* يمكنك إضافة عقارب الساعة هنا إذا أردت */
+}
+
+/* ============ زر جوجل بلاي ============ */
+.play-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.play-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* ============ البيانات القانونية في الفوتر ============ */
+.legal-info {
+    margin: 20px auto;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: #aaa;
+    max-width: 800px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 10px;
+}
+.legal-info strong {
+    color: var(--gold-main);
+}
