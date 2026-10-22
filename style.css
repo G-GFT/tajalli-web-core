@@ -414,3 +414,35 @@ body {
 .legal-info strong {
     color: var(--gold-main);
 }
+/* ============ شريط سفينة نوح ============ */
+.noah-banner {
+    margin: 30px auto 0;
+    max-width: 600px;
+    background: rgba(212, 175, 55, 0.08); /* خلفية ذهبية خفيفة */
+    border: 1px dashed rgba(212, 175, 55, 0.4);
+    border-radius: 12px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: right;
+    animation: pulseBanner 3s ease-in-out infinite; /* حركة الظهور والاختفاء */
+}
+
+.noah-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
+}
+
+.noah-banner p {
+    color: var(--gold-light);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.5;
+}
+
+@keyframes pulseBanner {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(0.98); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+}
