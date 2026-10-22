@@ -354,7 +354,7 @@ body {
 .bg-clock-globe {
     width: 100%; height: 100%;
     border-radius: 50%; /* هذا هو السر الذي يجعله مكوراً */
-    background-image: url('globe-map.png');
+    background-image: url('globe-clock.png');
     background-size: cover;
     background-position: center;
     
