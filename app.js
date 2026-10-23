@@ -127,3 +127,28 @@ window.addEventListener('load', () => {
         }, 2200);
     }
 });
+// === ميزة الخلفية الحية (عندما يترك المستخدم الصفحة) ===
+let isMusicPlaying = false;
+const audioElement = document.getElementById('welcomeSound');
+
+// دالة لمراقبة تغير حالة الصفحة
+document.addEventListener('visibilitychange', () => {
+    const container = document.querySelector('.container');
+    const splash = document.getElementById('splashScreen');
+    
+    if (document.hidden) {
+        // المستخدم ترك الصفحة (فتح تبويب آخر)
+        // 1. إخفاء المحتوى (الكتابة والأزرار) بشفافية
+        if (container) container.style.opacity = '0.1'; 
+        
+        // 2. التأكد من أن الموسيقى تعمل
+        if (audioElement && audioElement.paused) {
+            audioElement.play().catch(e => console.log("Audio play blocked"));
+        }
+        
+    } else {
+        // المستخدم عاد للصفحة
+        // 1. إعادة المحتوى للظهور
+        if (container) container.style.opacity = '1';
+    }
+});
