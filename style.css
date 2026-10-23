@@ -500,3 +500,60 @@ body {
     color: var(--gold-main);
     font-size: 1rem;
 }
+/* ============ إزاحة أيقونة الترجمة تحت تواصل معنا ============ */
+.site-header {
+    flex-wrap: wrap; /* للسماح بالعناصر بالنزول لسطر جديد */
+}
+.language-selector-wrapper {
+    order: 3; /* ترتيب العنصر ليكون الثالث */
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* محاذاة لليمين (تحت تواصل معنا) */
+    margin-top: 10px;
+}
+[dir="ltr"] .language-selector-wrapper {
+    justify-content: flex-end; /* محاذاة لليسار في الإنجليزية */
+}
+
+/* ============ توسيع الصفحة من الأسفل (لتظهر صورة الفوتر) ============ */
+.container {
+    min-height: 100vh;
+    padding-bottom: 250px; /* مساحة إضافية في الأسفل */
+}
+
+/* ============ ضبط الهواتف المحمولة (Responsive) ============ */
+@media (max-width: 768px) {
+    .site-header {
+        flex-direction: column;
+        align-items: center;
+    }
+    .language-selector-wrapper {
+        justify-content: center; /* في الموبايل نضعها في المنتصف */
+        margin-top: 15px;
+    }
+    .simple-nav {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .hero-title {
+        font-size: 2rem;
+    }
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+    }
+    .noah-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    .bg-clock-globe-wrapper {
+        width: 90vmin; /* تصغير الكرة الأرضية في الموبايل */
+        height: 90vmin;
+    }
+    .legal-info {
+        font-size: 0.75rem; /* تصغير خط البيانات القانونية في الموبايل */
+        padding: 10px;
+    }
+}
