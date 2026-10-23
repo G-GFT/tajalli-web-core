@@ -2,7 +2,7 @@
 
 let currentLang = localStorage.getItem('tajalli_lang');
 
-/* ---------- جلب ملف الترجمة من مجلد locales ---------- */
+/* ---------- جلب ملف الترجمة ---------- */
 async function loadAndApplyLanguage(langCode) {
     try {
         const response = await fetch(`locales/${langCode}.json`);
@@ -10,19 +10,16 @@ async function loadAndApplyLanguage(langCode) {
         
         const translations = await response.json();
         applyTranslations(langCode, translations);
-        
     } catch (error) {
         console.error("Translation Error:", error);
-        if (langCode !== 'ar') {
-            loadAndApplyLanguage('ar'); // العودة للعربية عند الخطأ
-        }
+        if (langCode !== 'ar') loadAndApplyLanguage('ar');
     }
 }
 
-/* ---------- تطبيق الترجمة على الصفحة ---------- */
+/* ---------- تطبيق الترجمة ---------- */
 function applyTranslations(langCode, t) {
     const meta = t._meta || { dir: 'ltr', code: langCode.toUpperCase() };
-
+    
     currentLang = langCode;
     localStorage.setItem('tajalli_lang', langCode);
 
@@ -52,7 +49,10 @@ function applyTranslations(langCode, t) {
 document.addEventListener('DOMContentLoaded', () => {
     const langBtn = document.getElementById('langToggleBtn');
     const langDropdown = document.getElementById('langDropdown');
+    const muteBtn = document.getElementById('muteBtn');
+    const audio = document.getElementById('welcomeSound');
 
+    // 1. قائمة اللغات
     if (langBtn && langDropdown) {
         langBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -75,27 +75,51 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // === التقاط لغة المتصفح تلقائياً ===
+    // 2. زر كتم الصوت
+    if (muteBtn && audio) {
+        muteBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                muteBtn.innerText = "🔊";
+            } else {
+                audio.pause();
+                muteBtn.innerText = "🔇";
+            }
+        });
+    }
+
+    // 3. لغة المتصفح
     if (!currentLang) {
-        const browserLang = navigator.language || navigator.userLanguage; // مثل: ar-EG, en-US
-        const primaryLang = browserLang.split('-')[0]; // استخراج 'ar' أو 'en'
-        
-        // اللغات المدعومة في موقعك
+        const browserLang = (navigator.language || navigator.userLanguage).split('-')[0];
         const supportedLangs = ['ar', 'en', 'tr', 'fr', 'de', 'ru', 'hi'];
-        
-        if (supportedLangs.includes(primaryLang)) {
-            currentLang = primaryLang; // إذا كانت لغة المتصفح مدعومة، استخدمها
-        } else {
-            currentLang = 'ar'; // وإلا استخدم العربية
-        }
+        currentLang = supportedLangs.includes(browserLang) ? browserLang : 'ar';
     }
 
     loadAndApplyLanguage(currentLang);
 });
 
-/* ---------- شاشة البداية (Splash) ---------- */
+/* ---------- شاشة البداية + تشغيل الصوت ---------- */
 window.addEventListener('load', () => {
     const splash = document.getElementById('splashScreen');
+    const audio = document.getElementById('welcomeSound');
+    let audioPlayed = false;
+
+    const playAudio = () => {
+        if (audio && !audioPlayed) {
+            audio.play().then(() => {
+                audioPlayed = true;
+            }).catch(err => console.log("Audio play blocked:", err));
+        }
+    };
+
+    // محاولة تشغيل الصوت
+    playAudio();
+
+    // إذا منع المتصفح التشغيل التلقائي، نفعله عند أول نقرة
+    document.body.addEventListener('click', playAudio, { once: true });
+    document.body.addEventListener('touchstart', playAudio, { once: true });
+
+    // إخفاء شاشة البداية
     if (splash) {
         setTimeout(() => {
             splash.classList.add('splash-hide');

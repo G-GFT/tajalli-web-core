@@ -1,5 +1,5 @@
 /* ============================================================
-   Tajalli Plus — Stylesheet v3
+   Tajalli Plus — Stylesheet v4 (Clean & Fixed)
    ============================================================ */
 *, *::before, *::after {
     margin: 0; padding: 0; box-sizing: border-box;
@@ -38,522 +38,186 @@ body {
     background: radial-gradient(circle at center, #142033 0%, #05070c 85%);
     transition: opacity 0.8s ease, visibility 0.8s ease;
 }
-.splash-hide {
-    opacity: 0; visibility: hidden; pointer-events: none;
-}
-
+.splash-hide { opacity: 0; visibility: hidden; pointer-events: none; }
 .splash-kaaba {
-    position: absolute;
-    width: 340px; height: 340px;
-    border-radius: 50%;
+    position: absolute; width: 340px; height: 340px; border-radius: 50%;
     border: 1px solid rgba(212, 175, 55, 0.25);
-    box-shadow:
-        0 0 60px rgba(212, 175, 55, 0.15),
-        inset 0 0 80px rgba(212, 175, 55, 0.08);
+    box-shadow: 0 0 60px rgba(212, 175, 55, 0.15), inset 0 0 80px rgba(212, 175, 55, 0.08);
     animation: kaabaSpin 18s linear infinite, kaabaPulse 3s ease-in-out infinite;
 }
 .splash-kaaba::before, .splash-kaaba::after {
-    content: '';
-    position: absolute; inset: 20px;
-    border-radius: 50%;
+    content: ''; position: absolute; inset: 20px; border-radius: 50%;
     border: 1px solid rgba(212, 175, 55, 0.15);
 }
 .splash-kaaba::after { inset: 60px; border-color: rgba(212, 175, 55, 0.35); }
-
 @keyframes kaabaSpin { to { transform: rotate(360deg); } }
 @keyframes kaabaPulse {
     0%, 100% { box-shadow: 0 0 60px rgba(212, 175, 55, 0.15), inset 0 0 80px rgba(212, 175, 55, 0.08); }
     50%      { box-shadow: 0 0 100px rgba(212, 175, 55, 0.35), inset 0 0 120px rgba(212, 175, 55, 0.18); }
 }
-
-.splash-logo {
-    position: relative; z-index: 2;
-    text-align: center;
-    animation: splashFadeIn 1.4s ease-out;
-}
+.splash-logo { position: relative; z-index: 2; text-align: center; animation: splashFadeIn 1.4s ease-out; }
 .splash-arabic {
-    display: block;
-    font-size: clamp(2.5rem, 8vw, 4rem);
-    font-weight: 900;
-    color: var(--gold-main);
-    text-shadow: 0 0 30px var(--gold-glow), 0 0 60px rgba(212,175,55,0.2);
+    display: block; font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900;
+    color: var(--gold-main); text-shadow: 0 0 30px var(--gold-glow), 0 0 60px rgba(212,175,55,0.2);
     letter-spacing: 4px;
 }
 .splash-latin {
-    display: block;
-    margin-top: 12px;
-    font-size: clamp(0.75rem, 2vw, 1rem);
-    letter-spacing: 8px;
-    color: rgba(212, 175, 55, 0.75);
-    font-weight: 600;
+    display: block; margin-top: 12px; font-size: clamp(0.75rem, 2vw, 1rem);
+    letter-spacing: 8px; color: rgba(212, 175, 55, 0.75); font-weight: 600;
 }
-
-.splash-loader {
-    position: relative; z-index: 2;
-    display: flex; gap: 8px;
-    margin-top: 40px;
-}
+.splash-loader { position: relative; z-index: 2; display: flex; gap: 8px; margin-top: 40px; }
 .splash-loader span {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--gold-main);
-    box-shadow: 0 0 12px var(--gold-glow);
-    animation: dotPulse 1.2s ease-in-out infinite;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--gold-main);
+    box-shadow: 0 0 12px var(--gold-glow); animation: dotPulse 1.2s ease-in-out infinite;
 }
 .splash-loader span:nth-child(2) { animation-delay: 0.2s; }
 .splash-loader span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes splashFadeIn { from { opacity: 0; transform: translateY(20px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes dotPulse { 0%, 100% { transform: scale(0.6); opacity: 0.4; } 50% { transform: scale(1.2); opacity: 1; } }
 
-@keyframes splashFadeIn {
-    from { opacity: 0; transform: translateY(20px) scale(0.96); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-@keyframes dotPulse {
-    0%, 100% { transform: scale(0.6); opacity: 0.4; }
-    50%      { transform: scale(1.2); opacity: 1; }
-}
-
-/* ============ خلفيات ثابتة ============ */
-#starfield {
-    position: fixed; inset: 0;
-    width: 100%; height: 100%;
-    z-index: -2; pointer-events: none;
-}
-
+/* ============ الخلفيات ============ */
+#starfield { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
 .bg-golden-glow {
-    position: fixed;
-    top: -30vmin; left: 50%;
-    transform: translateX(-50%);
-    width: 120vmin; height: 120vmin;
-    border-radius: 50%;
-    background: radial-gradient(circle,
-        rgba(212, 175, 55, 0.12) 0%,
-        rgba(212, 175, 55, 0.04) 35%,
-        transparent 70%);
-    filter: blur(40px);
-    pointer-events: none;
-    z-index: -2;
-    animation: goldenFloat 12s ease-in-out infinite;
+    position: fixed; top: -30vmin; left: 50%; transform: translateX(-50%);
+    width: 120vmin; height: 120vmin; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0.04) 35%, transparent 70%);
+    filter: blur(40px); pointer-events: none; z-index: -2; animation: goldenFloat 12s ease-in-out infinite;
 }
-@keyframes goldenFloat {
-    0%, 100% { transform: translateX(-50%) translateY(0) scale(1); }
-    50%      { transform: translateX(-50%) translateY(30px) scale(1.08); }
-}
+@keyframes goldenFloat { 0%, 100% { transform: translateX(-50%) translateY(0) scale(1); } 50% { transform: translateX(-50%) translateY(30px) scale(1.08); } }
 
-.bg-globe-spin {
-    position: fixed; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90vmin; height: 90vmin;
-    border-radius: 50%;
-    border: 1px solid rgba(212, 175, 55, 0.08);
-    box-shadow: inset 0 0 80px rgba(212, 175, 55, 0.04);
-    animation: rotateSlow 140s linear infinite;
-    pointer-events: none; z-index: -1;
+.bg-clock-globe-wrapper {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 70vmin; height: 70vmin; z-index: -1; pointer-events: none; perspective: 1000px; opacity: 0.25;
 }
-@keyframes rotateSlow {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to   { transform: translate(-50%, -50%) rotate(360deg); }
+.bg-clock-globe {
+    width: 100%; height: 100%; border-radius: 50%; background-image: url('globe-clock.png');
+    background-size: cover; background-position: center;
+    box-shadow: inset -20px 0 50px rgba(0,0,0,0.9), inset 20px 0 50px rgba(212, 175, 55, 0.2), 0 0 50px rgba(212, 175, 55, 0.1);
+    animation: spinGlobe 40s linear infinite;
+}
+@keyframes spinGlobe { 0% { background-position: 0% center; } 100% { background-position: 400% center; } }
+.bg-clock-globe::after {
+    content: ''; position: absolute; top: -5%; left: -5%; width: 110%; height: 110%;
+    border-radius: 50%; border: 2px solid rgba(212, 175, 55, 0.3); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
 }
 
 /* ============ الحاوية والهيدر ============ */
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px;
-    position: relative;
-    z-index: 1;
-}
-
-.site-header {
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 15px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--glass-border);
-    margin-bottom: 40px;
-}
-.brand-name {
-    font-size: 1.8rem; font-weight: 900; letter-spacing: 1px;
-}
-.gold-text {
-    color: var(--gold-main);
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-}
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+.site-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; padding: 20px 0; border-bottom: 1px solid var(--glass-border); margin-bottom: 40px; }
+.brand-name { font-size: 1.8rem; font-weight: 900; letter-spacing: 1px; }
+.gold-text { color: var(--gold-main); text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
 .muted-text { color: var(--text-muted); font-size: 0.9rem; }
 .light-gray-text { color: var(--text-soft); }
 .gold-highlight { color: var(--gold-main); font-weight: 800; }
 
-.simple-nav { display: flex; gap: 20px; }
-.simple-nav a {
-    color: var(--text-muted); text-decoration: none;
-    font-weight: 600; transition: 0.3s;
-}
-.simple-nav a:hover {
-    color: var(--gold-main);
-    text-shadow: 0 0 8px var(--gold-glow);
-}
-
-/* ============ Hero ============ */
-.hero-section { text-align: center; padding: 60px 20px; }
-.hero-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 900; margin-bottom: 20px; line-height: 1.25;
-}
-.hero-desc {
-    font-size: 1.1rem; max-width: 640px;
-    margin: 0 auto 32px; color: #cccccc;
-}
-
-.cta-buttons {
-    display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;
-}
-.btn-primary {
-    display: inline-block;
-    background: linear-gradient(45deg, var(--gold-dark), var(--gold-main), var(--gold-light));
-    background-size: 200% 200%;
-    color: #000; padding: 15px 35px; border-radius: 50px;
-    font-weight: 800; text-decoration: none;
-    box-shadow: 0 0 22px rgba(212, 175, 55, 0.35);
-    transition: all 0.35s ease;
-    animation: btnShine 4s ease infinite;
-}
-@keyframes btnShine {
-    0%, 100% { background-position: 0% 50%; }
-    50%      { background-position: 100% 50%; }
-}
-.btn-primary:hover {
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 0 32px rgba(212, 175, 55, 0.6);
-}
-.btn-secondary {
-    display: inline-block;
-    border: 2px solid var(--gold-main); color: var(--gold-main);
-    padding: 13px 30px; border-radius: 50px;
-    font-weight: 800; text-decoration: none;
-    transition: all 0.3s;
-}
-.btn-secondary:hover {
-    background: rgba(212, 175, 55, 0.12);
-    box-shadow: 0 0 20px var(--gold-glow);
-}
-
-/* ============ Features ============ */
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px; margin-top: 50px;
-}
-.feature-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 32px 24px;
-    text-align: center;
-    transition: transform 0.35s ease, border-color 0.35s, box-shadow 0.35s;
-}
-.feature-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(212, 175, 55, 0.55);
-    box-shadow: 0 14px 40px rgba(0,0,0,0.5), 0 0 25px rgba(212,175,55,0.12);
-}
-.icon { font-size: 2.5rem; margin-bottom: 15px; }
-.feature-card h3 {
-    font-size: 1.25rem; margin-bottom: 10px;
-    color: var(--text-white);
-}
-.feature-card p { font-size: 0.95rem; color: var(--text-muted); }
-
-/* ============ Footer ============ */
-.site-footer {
-    margin-top: 80px; padding: 30px 0;
-    border-top: 1px solid var(--glass-border);
-    text-align: center; color: var(--text-muted); font-size: 0.9rem;
-}
-.social-links {
-    display: flex; gap: 24px; justify-content: center;
-    flex-wrap: wrap; margin-top: 15px;
-}
-.social-links a {
-    color: var(--gold-main); text-decoration: none;
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 1rem; transition: 0.3s;
-}
-.social-links a:hover {
-    text-shadow: 0 0 12px var(--gold-glow);
-    transform: translateY(-2px);
-}
-
-/* ============ Language Selector ============ */
-.language-selector-wrapper {
-    position: relative; display: inline-block;
-}
+/* ============ نظام اللغات ============ */
+.language-selector-wrapper { order: 3; width: 100%; display: flex; justify-content: flex-end; margin-top: 10px; position: relative; }
+[dir="ltr"] .language-selector-wrapper { justify-content: flex-end; }
 .lang-btn-active {
-    background: transparent; border: 1px solid var(--glass-border);
-    color: var(--gold-main); padding: 8px 15px;
-    border-radius: 20px; cursor: pointer;
-    font-family: inherit; font-weight: bold;
-    transition: 0.3s;
+    background: transparent; border: 1px solid var(--glass-border); color: var(--gold-main);
+    padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: inherit; font-weight: bold; transition: 0.3s;
 }
-.lang-btn-active:hover {
-    background: rgba(212, 175, 55, 0.1);
-    box-shadow: 0 0 12px var(--gold-glow);
-}
+.lang-btn-active:hover { background: rgba(212, 175, 55, 0.1); box-shadow: 0 0 12px var(--gold-glow); }
 .lang-dropdown {
-    position: absolute; top: calc(100% + 6px); right: 0;
-    background: #1a233a;
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 8px 0; min-width: 170px;
-    z-index: 100;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.65);
-    animation: dropdownIn 0.25s ease;
-}
-@keyframes dropdownIn {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    position: absolute; top: calc(100% + 6px); right: 0; background: #1a233a;
+    border: 1px solid var(--glass-border); border-radius: 12px; padding: 8px 0; min-width: 170px;
+    z-index: 9999; box-shadow: 0 12px 40px rgba(0,0,0,0.85); animation: dropdownIn 0.25s ease;
 }
 [dir="ltr"] .lang-dropdown { left: 0; right: auto; }
+@keyframes dropdownIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 .lang-dropdown.hidden { display: none; }
-.lang-dropdown a {
-    display: block; padding: 10px 20px;
-    color: #fff; text-decoration: none;
-    transition: 0.2s; font-size: 0.95rem;
+.lang-dropdown a { display: block; padding: 10px 20px; color: #fff; text-decoration: none; transition: 0.2s; font-size: 0.95rem; }
+.lang-dropdown a:hover, .lang-dropdown a.active { background: rgba(212, 175, 55, 0.18); color: var(--gold-main); }
+
+/* ============ القائمة البطولية ============ */
+.simple-nav { display: flex; gap: 20px; }
+.simple-nav a { color: var(--text-muted); text-decoration: none; font-weight: 600; transition: 0.3s; }
+.simple-nav a:hover { color: var(--gold-main); text-shadow: 0 0 8px var(--gold-glow); }
+.hero-section { text-align: center; padding: 60px 20px; }
+.hero-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; margin-bottom: 20px; line-height: 1.25; }
+.hero-desc { font-size: 1.1rem; max-width: 640px; margin: 0 auto 32px; color: #cccccc; }
+.cta-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+    display: inline-block; background: linear-gradient(45deg, var(--gold-dark), var(--gold-main), var(--gold-light));
+    background-size: 200% 200%; color: #000; padding: 15px 35px; border-radius: 50px;
+    font-weight: 800; text-decoration: none; box-shadow: 0 0 22px rgba(212, 175, 55, 0.35);
+    transition: all 0.35s ease; animation: btnShine 4s ease infinite;
 }
-.lang-dropdown a:hover, .lang-dropdown a.active {
-    background: rgba(212, 175, 55, 0.18);
-    color: var(--gold-main);
+@keyframes btnShine { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.btn-primary:hover { transform: scale(1.05) translateY(-2px); box-shadow: 0 0 32px rgba(212, 175, 55, 0.6); }
+.btn-secondary {
+    display: inline-block; border: 2px solid var(--gold-main); color: var(--gold-main);
+    padding: 13px 30px; border-radius: 50px; font-weight: 800; text-decoration: none; transition: all 0.3s;
+}
+.btn-secondary:hover { background: rgba(212, 175, 55, 0.12); box-shadow: 0 0 20px var(--gold-glow); }
+.play-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+.play-btn svg { width: 22px; height: 22px; }
+
+/* ============ المميزات ============ */
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin-top: 50px; }
+.feature-card {
+    background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border); border-radius: 16px; padding: 32px 24px;
+    text-align: center; transition: transform 0.35s ease, border-color 0.35s, box-shadow 0.35s;
+}
+.feature-card:hover { transform: translateY(-6px); border-color: rgba(212, 175, 55, 0.55); box-shadow: 0 14px 40px rgba(0,0,0,0.5), 0 0 25px rgba(212,175,55,0.12); }
+.icon { font-size: 2.5rem; margin-bottom: 15px; }
+.feature-card h3 { font-size: 1.25rem; margin-bottom: 10px; color: var(--text-white); }
+.feature-card p { font-size: 0.95rem; color: var(--text-muted); }
+
+/* ============ شريط سفينة نوح ============ */
+.noah-banner {
+    margin: 30px auto 0; max-width: 600px; background: rgba(212, 175, 55, 0.08);
+    border: 1px dashed rgba(212, 175, 55, 0.4); border-radius: 12px; padding: 15px 20px;
+    display: flex; align-items: center; gap: 15px; text-align: right; animation: pulseBanner 3s ease-in-out infinite;
+}
+.noah-icon { font-size: 2rem; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6)); }
+.noah-banner p { color: var(--gold-light); font-size: 0.95rem; font-weight: 600; margin: 0; line-height: 1.5; }
+@keyframes pulseBanner { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.8; transform: scale(0.98); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); } }
+
+/* ============ الفوتر المحدث (النصوص منفصلة عن الصورة) ============ */
+.site-footer {
+    position: relative; background: transparent; border-top: none;
+    padding: 0; margin-top: 80px; text-align: center; color: #ddd;
+}
+.footer-content-wrapper {
+    position: relative; z-index: 10; padding: 0 20px;
+}
+.legal-info {
+    margin: 0 auto 20px; font-size: 0.85rem; line-height: 1.8; color: #ddd;
+    max-width: 800px; padding: 15px 20px; background: rgba(10, 14, 23, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 12px;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.legal-info strong { color: var(--gold-main); font-size: 1rem; }
+.footer-image-container {
+    width: 100%; height: 350px; margin-top: 30px;
+    background-image: url('footer-bg.png'); background-size: cover;
+    background-position: center top; background-repeat: no-repeat;
+    position: relative; opacity: 0.85; /* الوضوح والإضاءة المطلوبة */
+}
+.footer-image-container::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 100px;
+    background: linear-gradient(to bottom, #0a0e17 0%, transparent 100%); z-index: 1;
 }
 
-/* ============ التجاوب ============ */
+/* ============ التجاوب (الموبايل) ============ */
 @media (max-width: 768px) {
-    .site-header {
-        flex-direction: column; gap: 15px; text-align: center;
-    }
-    .simple-nav { gap: 14px; justify-content: center; }
+    .site-header { flex-direction: column; align-items: center; gap: 15px; text-align: center; }
+    .language-selector-wrapper { justify-content: center; margin-top: 15px; }
+    .simple-nav { margin-top: 15px; flex-wrap: wrap; justify-content: center; gap: 14px; }
     .hero-section { padding: 40px 16px; }
-    .btn-secondary { width: 100%; }
-    .btn-primary   { width: 100%; }
-    .social-links { gap: 16px; }
-    .splash-kaaba { width: 260px; height: 260px; }
+    .hero-title { font-size: 2rem; }
+    .btn-secondary { width: 100%; max-width: 300px; }
+    .btn-primary { width: 100%; max-width: 300px; }
+    .noah-banner { flex-direction: column; text-align: center; gap: 10px; }
+    .bg-clock-globe-wrapper { width: 90vmin; height: 90vmin; }
+    .legal-info { font-size: 0.75rem; padding: 10px; }
+    .footer-image-container { height: 250px; }
 }
 @media (max-width: 480px) {
     .brand-name { font-size: 1.4rem; }
     .hero-title { font-size: 1.7rem; }
-}
-/* ============ تأثير الكرة الأرضية المجسمة ============ */
-.bg-clock-globe-wrapper {
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70vmin; height: 70vmin;
-    z-index: -1;
-    pointer-events: none;
-    perspective: 1000px; /* لإعطاء عمق 3D */
-    opacity: 0.25; /* شفافية */
-}
-
-.bg-clock-globe {
-    width: 100%; height: 100%;
-    border-radius: 50%; /* هذا هو السر الذي يجعله مكوراً */
-    background-image: url('globe-clock.png');
-    background-size: cover;
-    background-position: center;
-    
-    /* إضاءة من الخارج لتعطي شكل كرة مجسمة */
-    box-shadow: 
-        inset -20px 0 50px rgba(0,0,0,0.9), /* ظل داخلي من اليمين */
-        inset 20px 0 50px rgba(212, 175, 55, 0.2), /* إضاءة ذهبية من اليسار */
-        0 0 50px rgba(212, 175, 55, 0.1);
-    
-    /* حركة الدوران */
-    animation: spinGlobe 40s linear infinite;
-}
-
-/* حركة الدوران 3D */
-@keyframes spinGlobe {
-    0% { background-position: 0% center; }
-    100% { background-position: 400% center; } 
-    /* بدلاً من تحريك العنصر (الذي يفقده شكله)، نحرك الخلفية داخله لتبدو كأنها تدور */
-}
-
-/* حلقة الساعة الذهبية حول الكرة */
-.bg-clock-globe::after {
-    content: '';
-    position: absolute;
-    top: -5%; left: -5%;
-    width: 110%; height: 110%;
-    border-radius: 50%;
-    border: 2px solid rgba(212, 175, 55, 0.3);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-    /* يمكنك إضافة عقارب الساعة هنا إذا أردت */
-}
-
-/* ============ زر جوجل بلاي ============ */
-.play-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-.play-btn svg {
-    width: 22px;
-    height: 22px;
-}
-
-/* ============ البيانات القانونية في الفوتر ============ */
-.legal-info {
-    margin: 20px auto;
-    font-size: 0.85rem;
-    line-height: 1.8;
-    color: #aaa;
-    max-width: 800px;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    border-radius: 10px;
-}
-.legal-info strong {
-    color: var(--gold-main);
-}
-/* ============ شريط سفينة نوح ============ */
-.noah-banner {
-    margin: 30px auto 0;
-    max-width: 600px;
-    background: rgba(212, 175, 55, 0.08); /* خلفية ذهبية خفيفة */
-    border: 1px dashed rgba(212, 175, 55, 0.4);
-    border-radius: 12px;
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    text-align: right;
-    animation: pulseBanner 3s ease-in-out infinite; /* حركة الظهور والاختفاء */
-}
-
-.noah-icon {
-    font-size: 2rem;
-    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
-}
-
-.noah-banner p {
-    color: var(--gold-light);
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin: 0;
-    line-height: 1.5;
-}
-
-@keyframes pulseBanner {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(0.98); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
-}
-/* ============ خلفية الفوتر الفخمة (صورة الكعبة) ============ */
-.site-footer {
-    position: relative;
-    margin-top: 100px;
-    padding: 60px 20px 40px;
-    border-top: 1px solid rgba(212, 175, 55, 0.2);
-    text-align: center;
-    color: #aaa;
-    font-size: 0.9rem;
-    overflow: hidden; /* لمنع خروج الصورة عن الإطار */
-    background: #0a0e17;
-}
-
-/* وضع الصورة كخلفية سفلية مع تلاشي تدريجي */
-.site-footer::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 100%;
-    background-image: url('footer-bg.png');
-    background-size: cover;
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    opacity: 0.35; /* شفافية الصورة لتكون مريحة للعين */
-    z-index: 0;
-    /* تلاشي الصورة من الأعلى للأسفل */
-    mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
-}
-
-/* لضمان ظهور النصوص فوق الصورة */
-.site-footer > * {
-    position: relative;
-    z-index: 1;
-}
-
-/* تنسيق خاص للبيانات القانونية لتظهر كبطاقة زجاجية فخمة فوق الصورة */
-.legal-info {
-    margin: 0 auto 20px;
-    font-size: 0.85rem;
-    line-height: 1.8;
-    color: #ddd;
-    max-width: 800px;
-    padding: 15px 20px;
-    background: rgba(10, 14, 23, 0.7); /* خلفية داكنة شفافة */
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 12px;
-    backdrop-filter: blur(5px); /* تأثير زجاجي */
-    -webkit-backdrop-filter: blur(5px);
-}
-.legal-info strong {
-    color: var(--gold-main);
-    font-size: 1rem;
-}
-/* ============ إزاحة أيقونة الترجمة تحت تواصل معنا ============ */
-.site-header {
-    flex-wrap: wrap; /* للسماح بالعناصر بالنزول لسطر جديد */
-}
-.language-selector-wrapper {
-    order: 3; /* ترتيب العنصر ليكون الثالث */
-    width: 100%;
-    display: flex;
-    justify-content: flex-end; /* محاذاة لليمين (تحت تواصل معنا) */
-    margin-top: 10px;
-}
-[dir="ltr"] .language-selector-wrapper {
-    justify-content: flex-end; /* محاذاة لليسار في الإنجليزية */
-}
-
-/* ============ توسيع الصفحة من الأسفل (لتظهر صورة الفوتر) ============ */
-.container {
-    min-height: 100vh;
-    padding-bottom: 250px; /* مساحة إضافية في الأسفل */
-}
-
-/* ============ ضبط الهواتف المحمولة (Responsive) ============ */
-@media (max-width: 768px) {
-    .site-header {
-        flex-direction: column;
-        align-items: center;
-    }
-    .language-selector-wrapper {
-        justify-content: center; /* في الموبايل نضعها في المنتصف */
-        margin-top: 15px;
-    }
-    .simple-nav {
-        margin-top: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .hero-title {
-        font-size: 2rem;
-    }
-    .btn-primary, .btn-secondary {
-        width: 100%;
-        max-width: 300px;
-    }
-    .noah-banner {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    .bg-clock-globe-wrapper {
-        width: 90vmin; /* تصغير الكرة الأرضية في الموبايل */
-        height: 90vmin;
-    }
-    .legal-info {
-        font-size: 0.75rem; /* تصغير خط البيانات القانونية في الموبايل */
-        padding: 10px;
-    }
+    .social-links { gap: 16px; }
+    .splash-kaaba { width: 260px; height: 260px; }
 }

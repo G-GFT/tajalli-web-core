@@ -21,6 +21,11 @@
 </head>
 <body>
 
+    <!-- ملف الصوت الترحيبي (ذكر) -->
+    <audio id="welcomeSound" loop>
+        <source src="welcome-sound.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- شاشة البداية -->
     <div id="splashScreen" class="splash-screen" aria-hidden="true">
         <div class="splash-kaaba"></div>
@@ -49,7 +54,11 @@
                 <span class="tagline muted-text translatable" data-key="slogan">رؤية إسلامية عالمية</span>
             </div>
             
-            <div class="language-selector-wrapper">
+            <div class="language-selector-wrapper" style="display: flex; gap: 10px; align-items: center;">
+                <!-- زر كتم الصوت -->
+                <button id="muteBtn" class="lang-btn-active" title="Mute/Unmute">🔊</button>
+                
+                <!-- زر الترجمة -->
                 <button id="langToggleBtn" class="lang-btn-active" aria-label="Select Language">
                     🌍 <span id="currentLangCode">AR</span> ▾
                 </button>
@@ -103,6 +112,7 @@
                 </p>
             </div>
         </section>
+
         <!-- المميزات -->
         <section id="features" class="features-grid">
             <div class="feature-card glass-effect">
@@ -122,30 +132,36 @@
             </div>
         </section>
 
-        <!-- الفوتر -->
+        <!-- الفوتر المحدث -->
         <footer id="contact" class="site-footer">
-            <p class="translatable" data-key="footer_slogan">بوابة إيمانية وتقنية لعالم أوسع</p>
-            
-            <!-- البيانات القانونية للشركة -->
-            <div class="legal-info">
-                <p><strong>Imparator Group Dış Ticaret Limited Şirketi</strong></p>
-                <p>Adres: Abdurrahman Yagkent Mah. 2011. Sokak No:1 A7 Blok D:69, Esenyurt/İstanbul, Türkiye</p>
-                <p>Tel: 00905444035158 | Web: www.g7gft.com</p>
+            <!-- حاوية النصوص -->
+            <div class="footer-content-wrapper">
+                <p class="translatable" data-key="footer_slogan" style="color: var(--gold-main); font-weight: bold; margin-bottom: 20px;">بوابة إيمانية وتقنية لعالم أوسع</p>
+                
+                <!-- البيانات القانونية للشركة -->
+                <div class="legal-info">
+                    <p><strong>Imparator Group Dış Ticaret Limited Şirketi</strong></p>
+                    <p>Adres: Abdurrahman Yagkent Mah. 2011. Sokak No:1 A7 Blok D:69, Esenyurt/İstanbul, Türkiye</p>
+                    <p>Tel: 00905440135158 | Web: www.g7gft.com</p>
+                </div>
+
+                <p style="margin-top: 20px;">&copy; 2026 Tajalli Plus &amp; G-GFT Project. All Rights Reserved.</p>
+                
+                <div class="social-links" style="margin-top: 15px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                    <a href="https://whatsapp.com/channel/0029Vaz7I1f4SpkEsAXuGG2p" target="_blank" rel="noopener" title="WhatsApp" style="color: var(--gold-main); text-decoration: none;">
+                        ✈ <span class="translatable" data-key="footer_whatsapp_label">قناة واتساب</span>
+                    </a>
+                    <a href="https://www.youtube.com/@G-GFT" target="_blank" rel="noopener" title="YouTube" style="color: var(--gold-main); text-decoration: none;">
+                        ▶ <span class="translatable" data-key="footer_youtube_label">يوتيوب الرسمي</span>
+                    </a>
+                    <a href="mailto:god.gifts.sky@gmail.com" title="Email" style="color: var(--gold-main); text-decoration: none;">
+                        ✉ <span class="translatable" data-key="footer_email_label">راسلنا</span>
+                    </a>
+                </div>
             </div>
 
-            <p>&copy; 2026 Tajalli Plus &amp; G-GFT Project. All Rights Reserved.</p>
-            
-            <div class="social-links">
-                <a href="https://whatsapp.com/channel/0029Vaz7I1f4SpkEsAXuGG2p" target="_blank" rel="noopener" title="WhatsApp">
-                    ✈ <span class="translatable" data-key="footer_whatsapp_label">قناة واتساب</span>
-                </a>
-                <a href="https://www.youtube.com/@G-GFT" target="_blank" rel="noopener" title="YouTube">
-                    ▶ <span class="translatable" data-key="footer_youtube_label">يوتيوب الرسمي</span>
-                </a>
-                <a href="mailto:god.gifts.sky@gmail.com" title="Email">
-                    ✉ <span class="translatable" data-key="footer_email_label">راسلنا</span>
-                </a>
-            </div>
+            <!-- كتلة صورة الفوتر المنفصلة -->
+            <div class="footer-image-container"></div>
         </footer>
 
     </main>
