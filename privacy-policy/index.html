@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سياسة الخصوصية | Privacy Policy - Tajalli Plus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0a0e17;
+            color: #ddd;
+            line-height: 1.8;
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: #d4af37; margin-bottom: 20px; font-size: 2rem; text-align: center;}
+        h2 { color: #d4af37; margin-top: 30px; margin-bottom: 10px; font-size: 1.4rem;}
+        p, li { font-size: 1rem; margin-bottom: 10px; }
+        ul { padding-right: 20px; }
+        .lang-switch { text-align: center; margin-bottom: 30px; }
+        .lang-switch a { color: #d4af37; text-decoration: none; margin: 0 10px; font-weight: bold;}
+        .lang-switch a:hover { text-decoration: underline; }
+        .en-section { direction: ltr; text-align: left; display: none; margin-top: 50px; border-top: 1px solid #333; padding-top: 30px;}
+        .ar-section { direction: rtl; text-align: right; }
+        .highlight { color: #fff; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switch">
+        <a href="#" onclick="showLang('ar')">العربية</a> | <a href="#" onclick="showLang('en')">English</a>
+    </div>
+
+    <!-- القسم العربي -->
+    <div id="ar-content" class="ar-section">
+        <h1>سياسة الخصوصية — تجلّي / نور</h1>
+        <p>نحن في <span class="highlight">Tajalli Plus (تجلّي)</span> نحترم خصوصيتك ونلتزم بحماية بياناتك. توضح هذه السياسة كيفية تعاملنا مع معلوماتك عند استخدام تطبيقنا وموقعنا.</p>
+        
+        <h2>1. جمع البيانات</h2>
+        <p>نحن <span class="highlight">لا نجمع</span> أي بيانات شخصية (مثل الاسم، البريد الإلكتروني، أو رقم الهاتف) عند استخدام التطبيق. لا يتطلب التطبيق إنشاء حساب أو تسجيل دخول.</p>
+        
+        <h2>2. الأذونات (Permissions)</h2>
+        <ul>
+            <li><span class="highlight">الموقع (Location):</span> يُستخدم فقط لحساب مواقيت الصلاة بدقة داخل جهازك، ولا يتم إرساله لأي خادم خارجي.</li>
+            <li><span class="highlight">الميكروفون (Microphone):</span> يُستخدم فقط لميزة "التسبيح الصوتي" (Voice Tasbih) إن وجدت، ولا يتم تسجيل أو إرسال أي صوت.</li>
+        </ul>
+        
+        <h2>3. البيانات المخزنة</h2>
+        <p>جميع إعداداتك (مثل الأذان المفضل، والعدادات) تُحفظ <span class="highlight">فقط على جهازك</span>. نحن لا نملك خوادم لتخزين بياناتك الشخصية.</p>
+
+        <h2>4. التحقق من الترخيص (License Verification)</h2>
+        <p>باستخدام خدمات Google Firebase، قد نقوم بتخزين "معرّف جهاز غير شخصي" (Non-personal device identifier) للتحقق من أن التطبيق مرخص بشكل قانوني. هذا المعرّف لا يرتبط باسمك أو بريدك الإلكتروني ولا يمكن استخدامه لتتبعك.</p>
+
+        <h2>5. التواصل</h2>
+        <p>لأي استفسار بخصوص الخصوصية، يمكنك التواصل معنا عبر: <a href="mailto:support@g7gft.com" style="color:#d4af37;">support@g7gft.com</a></p>
+    </div>
+
+    <!-- القسم الإنجليزي -->
+    <div id="en-content" class="en-section">
+        <h1>Privacy Policy — Tecelli / Noor</h1>
+        <p>At <span class="highlight">Tajalli Plus</span>, we respect your privacy and are committed to protecting your data. This policy explains how we handle your information when using our app and website.</p>
+        
+        <h2>1. Data Collection</h2>
+        <p>We <span class="highlight">do not collect</span> any personal data (such as name, email, or phone number). The app does not require an account or login to use.</p>
+        
+        <h2>2. Permissions</h2>
+        <ul>
+            <li><span class="highlight">Location:</span> Used only on-device to calculate accurate prayer times. It is never sent to any external server.</li>
+            <li><span class="highlight">Microphone:</span> Used only for the "Voice Tasbih" feature (if enabled). No audio is recorded or transmitted.</li>
+        </ul>
+        
+        <h2>3. Data Storage</h2>
+        <p>All your settings (preferred Adhan, counters) are stored <span class="highlight">locally on your device only</span>. We do not have servers to store your personal data.</p>
+
+        <h2>4. License Verification</h2>
+        <p>Using Google Firebase, we may store a "non-personal device identifier" solely to confirm legitimate activation. This identifier is not linked to your name or email and cannot be used to track you.</p>
+
+        <h2>5. Contact</h2>
+        <p>For any privacy inquiries, contact us at: <a href="mailto:support@g7gft.com" style="color:#d4af37;">support@g7gft.com</a></p>
+    </div>
+
+    <script>
+        function showLang(lang) {
+            if(lang === 'ar') {
+                document.getElementById('ar-content').style.display = 'block';
+                document.getElementById('en-content').style.display = 'none';
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.getElementById('ar-content').style.display = 'none';
+                document.getElementById('en-content').style.display = 'block';
+                document.documentElement.dir = 'ltr';
+            }
+        }
+    </script>
+</body>
+</html>
