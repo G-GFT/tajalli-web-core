@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم G-GFT المتكاملة</title>
+    <style>
+        :root {
+            --primary: #001365;
+            --bg: #f5f6fa;
+            --text: #2c3e50;
+            --border: #dcdde1;
+            --card-bg: #ffffff;
+            --text-secondary: #7f8c8d;
+        }
+
+        .dark-mode {
+            --bg: #1a1a1a;
+            --text: #ffffff;
+            --card-bg: #2d2d2d;
+            --border: #404040;
+            --text-secondary: #bdc3c7;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .token-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            text-align: right;
+            color: var(--text);
+        }
+
+        .price-box {
+            background: linear-gradient(135deg, var(--primary), #001f4d);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            background: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 5px;
+            transition: transform 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .registration-form {
+            display: inline-block;
+            text-align: left;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: var(--card-bg);
+        }
+
+        .registration-form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .registration-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 16px;
+            background: var(--card-bg);
+            color: var(--text);
+        }
+
+        .registration-form button {
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .registration-form button:hover {
+            background-color: #001f4d;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #28a745;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+
+        .copy-button {
+            padding: 5px 10px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .copy-button:hover {
+            background-color: #001f4d;
+        }
+
+        /* تعديلات الرسم البياني */
+        #priceChart {
+            width: 100%;
+            height: 400px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--card-bg);
+            margin: 20px 0;
+        }
+
+        /* تحسين زر تبديل اللغة */
+        .language-toggle {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--primary), #001f4d);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,19,101,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 2px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .language-toggle:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,19,101,0.4);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .language-toggle .lang-icon {
+            font-size: 24px;
+            margin-bottom: 3px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .language-toggle .lang-text {
+            font-size: 9px;
+            opacity: 0.95;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            letter-spacing: 0.5px;
+        }
+
+        .language-toggle::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #001365, #001f4d, #001365);
+            border-radius: 17px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .language-toggle:hover::before {
+            opacity: 1;
+        }
+
+        .rtl-mode {
+            direction: rtl;
+        }
+
+        .ltr-mode {
+            direction: ltr;
+        }
+
+        /* تحسين ألوان النص في الوضع المظلم */
+        .dark-mode .section h2,
+        .dark-mode .section h3 {
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .dark-mode table th,
+        .dark-mode table td {
+            color: #f8f9fa;
+            border-bottom-color: #495057;
+        }
+
+        .dark-mode .registration-form label {
+            color: #f8f9fa;
+        }
+
+        .dark-mode .registration-form input {
+            background: #495057;
+            color: #f8f9fa;
+            border-color: #6c757d;
+        }
+
+        .dark-mode .registration-form input::placeholder {
+            color: #adb5bd;
+        }
+
+        .dark-mode .registration-form input:focus {
+            background: #5a6268;
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0,19,101,0.25);
+        }
+
+        .dark-mode .copy-button {
+            background-color: var(--primary);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dark-mode .copy-button:hover {
+            background-color: #001f4d;
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        @media (max-width: 768px) {
+            #priceChart {
+                height: 300px;
+            }
+            
+            .language-toggle {
+                width: 60px;
+                height: 60px;
+                font-size: 10px;
+                bottom: 70px;
+            }
+            
+            .language-toggle .lang-icon {
+                font-size: 20px;
+                margin-bottom: 2px;
+            }
+            
+            .language-toggle .lang-text {
+                font-size: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://bronze-late-blackbird-902.mypinata.cloud/ipfs/bafkreieagurihuci2zhra6i6cnyo6ri3qsaxipxe4qhr26toiwvpi7gs2a" 
+             class="token-logo" 
+             alt="G-GFT Logo">
+        <h1 data-translate="main-title">TokenForGod (G-GFT)</h1>
+        
+        <div style="margin-top: 1rem;">
+            <a href="https://www.dextools.io/app/ar/polygon/pair-explorer/0xDf58A3b6DF14Fff52aA39f97CF2F7696E48B7B4e?t=1742555799470" 
+               class="btn"
+               target="_blank"
+               data-translate="dex-tools">
+                📊 DEX Tools
+            </a>
+            <a href="https://bronze-late-blackbird-902.mypinata.cloud/ipfs/bafkreif5z57y4je6iik5ickj62xr5qrinseo6smebch5zpivo6xaolbldm" 
+               class="btn"
+               target="_blank"
+               data-translate="whitepaper">
+                📄 الورقة البيضاء
+            </a>
+        </div>
+    </div>
+
+    <div class="dashboard">
+        <!-- قسم السعر والبيانات الأساسية -->
+        <div class="section">
+            <div class="price-box">
+                <h2><span data-translate="current-price">السعر الحالي:</span> <span id="currentPrice">$0.07955</span></h2>
+                <p><span data-translate="price-change">التغيير (24h):</span> <span style="color: #e74c3c;">-0.0021 (-2.64%)</span></p>
+            </div>
+
+            <div class="grid">
+                <div class="section">
+                    <h3 data-translate="basic-info">المعلومات الأساسية</h3>
+                    <table>
+                        <tr>
+                            <td data-translate="smart-contract">العقد الذكي</td>
+                            <td>
+                                <span id="contractAddress" data-full="0x672d85615539f3E91f5a2e919148A9372E809a54">0x672d...9a54</span>
+                                <button class="copy-button" onclick="copyContractAddress()" data-translate="copy">نسخ</button>
+                            </td>
+                        </tr>
+                        <tr><td data-translate="trading-pair">زوج التداول</td><td>0xdf58...7B4e</td></tr>
+                        <tr><td data-translate="liquidity">السيولة</td><td>$15.57 <span data-translate="million">مليون</span></td></tr>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h3 data-translate="market-cap-title">القيمة السوقية</h3>
+                    <table>
+                        <tr><td data-translate="market-cap">القيمة السوقية</td><td>$6.66B</td></tr>
+                        <tr><td data-translate="volume-24h">حجم التداول (24h)</td><td>$0.1373 <span data-translate="million">مليون</span></td></tr>
+                        <tr><td data-translate="total-supply">إجمالي المعروض</td><td>7.77 <span data-translate="billion">مليار</span></td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم تسجيل المحفظة -->
+        <div class="section">
+            <h2 data-translate="wallet-registration">تسجيل عنوان المحفظة</h2>
+            <div class="registration-form">
+                <form id="registrationForm">
+                    <label for="walletAddress" data-translate="wallet-address">عنوان المحفظة:</label>
+                    <input type="text" id="walletAddress" data-translate-placeholder="wallet-placeholder" placeholder="أدخل عنوان محفظتك هنا" required>
+                    <button type="submit" data-translate="submit-address">إرسال العنوان للعقد</button>
+                </form>
+            </div>
+            <div id="message" class="message"></div>
+        </div>
+
+        <!-- قسم زيادة السيولة الجديد -->
+        <div class="section">
+            <h2 data-translate="increase-liquidity-title">زيادة السيولة (للمكافأة الكبرى)</h2>
+            <div class="registration-form">
+                <p data-translate="liquidity-instructions">لزيادة السيولة والمساهمة في المشروع، يرجى اتباع الخطوات التالية:</p>
+                <button id="approveUSDTBtn" class="btn" data-translate="approve-usdt">1. الموافقة على USDT</button>
+                <button id="depositLiquidityBtn" class="btn" data-translate="deposit-liquidity">2. إيداع السيولة (8 USDT)</button>
+                <div id="liquidityMessage" class="message"></div>
+            </div>
+        </div>
+
+        <!-- الرسم البياني -->
+        <div class="section">
+            <h2 data-translate="price-chart">مخطط السعر التاريخي</h2>
+            <canvas id="priceChart"></canvas>
+        </div>
+    </div>
+
+    <!-- زر تبديل الوضع المظلم -->
+    <div class="dark-mode-toggle" onclick="toggleDarkMode()">🌓</div>
+
+    <!-- زر تبديل اللغة المحسن -->
+    <div class="language-toggle" onclick="toggleLanguage()">
+        <div class="lang-icon">🌐</div>
+        <div class="lang-text" id="langText">عربي</div>
+    </div>
+
+    <script>
+        // متغيرات عامة
+        let currentLanguage = 'ar';
+        let chart;
+        let priceUpdateInterval;
+
+        // ترجمات النظام
+        const translations = {
+            ar: {
+                'main-title': 'TokenForGod (G-GFT)',
+                'dashboard-title': 'لوحة تحكم G-GFT المتكاملة',
+                'dex-tools': '📊 DEX Tools',
+                'whitepaper': '📄 الورقة البيضاء',
+                'current-price': 'السعر الحالي:',
+                'price-change': 'التغيير (24h):',
+                'basic-info': 'المعلومات الأساسية',
+                'smart-contract': 'العقد الذكي',
+                'trading-pair': 'زوج التداول',
+                'liquidity': 'السيولة',
+                'copy': 'نسخ',
+                'market-cap-title': 'القيمة السوقية',
+                'market-cap': 'القيمة السوقية',
+                'volume-24h': 'حجم التداول (24h):',
+                'total-supply': 'إجمالي المعروض',
+                'wallet-registration': 'تسجيل عنوان المحفظة',
+                'wallet-address': 'عنوان المحفظة:',
+                'wallet-placeholder': 'أدخل عنوان محفظتك هنا',
+                'submit-address': 'إرسال العنوان للعقد',
+                'price-chart': 'مخطط السعر التاريخي',
+                'historical-price': 'السعر التاريخي (USD)',
+                'price-label': 'السعر:',
+                'january': 'يناير',
+                'february': 'فبراير',
+                'march': 'مارس',
+                'april': 'أبريل',
+                'may': 'مايو',
+                'june': 'يونيو',
+                'july': 'يوليو',
+                'august': 'أغسطس',
+                'september': 'سبتمبر',
+                'october': 'أكتوبر',
+                'november': 'نوفمبر',
+                'december': 'ديسمبر',
+                'invalid-address': 'العنوان غير صحيح. يرجى إدخال عنوان محفظة صحيح.',
+                'success-message': 'تم إرسال عنوان المحفظة للعقد بنجاح!',
+                'error-message': 'حدث خطأ أثناء إرسال العنوان.',
+                'copy-success': 'تم نسخ عنوان العقد الذكي:',
+                'copy-error': 'فشل في النسخ:',
+                'million': 'مليون',
+                'billion': 'مليار',
+                'lang-button': 'عربي',
+                'increase-liquidity-title': 'زيادة السيولة (للمكافأة الكبرى)',
+                'liquidity-instructions': 'لزيادة السيولة والمساهمة في المشروع، يرجى اتباع الخطوات التالية:',
+                'approve-usdt': '1. الموافقة على USDT',
+                'deposit-liquidity': '2. إيداع السيولة (8 USDT)'
+            },
+            
+            en: {
+                'main-title': 'TokenForGod (G-GFT)',
+                'dashboard-title': 'G-GFT Integrated Dashboard',
+                'dex-tools': '📊 DEX Tools',
+                'whitepaper': '📄 Whitepaper',
+                'current-price': 'Current Price:',
+                'price-change': 'Change (24h):',
+                'basic-info': 'Basic Information',
+                'smart-contract': 'Smart Contract',
+                'trading-pair': 'Trading Pair',
+                'liquidity': 'Liquidity',
+                'copy': 'Copy',
+                'market-cap-title': 'Market Cap',
+                'market-cap': 'Market Cap',
+                'volume-24h': 'Volume (24h):',
+                'total-supply': 'Total Supply',
+                'wallet-registration': 'Wallet Address Registration',
+                'wallet-address': 'Wallet Address:',
+                'wallet-placeholder': 'Enter your wallet address here',
+                'submit-address': 'Submit Address to Contract',
+                'price-chart': 'Historical Price Chart',
+                'historical-price': 'Historical Price (USD)',
+                'price-label': 'Price:',
+                'january': 'January',
+                'february': 'February',
+                'march': 'March',
+                'april': 'April',
+                'may': 'May',
+                'june': 'June',
+                'july': 'July',
+                'august': 'August',
+                'september': 'September',
+                'october': 'October',
+                'november': 'November',
+                'december': 'December',
+                'invalid-address': 'Invalid address. Please enter a valid wallet address.',
+                'success-message': 'Wallet address successfully sent to contract!',
+                'error-message': 'An error occurred while sending the address.',
+                'copy-success': 'Smart contract address copied:',
+                'copy-error': 'Failed to copy:',
+                'million': 'million',
+                'billion': 'billion',
+                'lang-button': 'English',
+                'increase-liquidity-title': 'Increase Liquidity (for Grand Prize)',
+                'liquidity-instructions': 'To increase liquidity and contribute to the project, please follow these steps:',
+                'approve-usdt': '1. Approve USDT',
+                'deposit-liquidity': '2. Deposit Liquidity (8 USDT)'
+            }
+        };
+
+        // تهيئة الرسم البياني البسيط
+        function initChart() {
+            const canvas = document.getElementById('priceChart');
+            const ctx = canvas.getContext('2d');
+            
+            // تعيين حجم الكانفاس
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            
+            // بيانات السعر
+            const data = [0.075, 0.078, 0.079, 0.081, 0.0795, 0.082, 0.085, 0.083, 0.087, 0.089, 0.091, 0.095];
+            const labels = getMonthLabels();
+            
+            // رسم الخلفية
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--card-bg');
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // إعدادات الرسم
+            const padding = 60;
+            const chartWidth = canvas.width - 2 * padding;
+            const chartHeight = canvas.height - 2 * padding - 40;
+            const minPrice = Math.min(...data);
+            const maxPrice = Math.max(...data);
+            const priceRange = maxPrice - minPrice;
+            
+            // رسم العنوان
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text');
+            ctx.font = 'bold 18px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(translations[currentLanguage]['historical-price'], canvas.width / 2, 30);
+            
+            // رسم المحاور
+            ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--border');
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(padding, padding + 40);
+            ctx.lineTo(padding, padding + 40 + chartHeight);
+            ctx.lineTo(padding + chartWidth, padding + 40 + chartHeight);
+            ctx.stroke();
+            
+            // رسم خطوط الشبكة
+            ctx.strokeStyle = 'rgba(200, 200, 200, 0.3)';
+            ctx.lineWidth = 0.5;
+            for (let i = 1; i < 5; i++) {
+                const y = padding + 40 + (i / 5) * chartHeight;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(padding + chartWidth, y);
+                ctx.stroke();
+            }
+            
+            // رسم الخط البياني
+            ctx.strokeStyle = '#001365';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            for (let i = 0; i < data.length; i++) {
+                const x = padding + (i / (data.length - 1)) * chartWidth;
+                const y = padding + 40 + (1 - (data[i] - minPrice) / priceRange) * chartHeight;
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.stroke();
+            
+            // رسم النقاط
+            ctx.fillStyle = '#001365';
+            for (let i = 0; i < data.length; i++) {
+                const x = padding + (i / (data.length - 1)) * chartWidth;
+                const y = padding + 40 + (1 - (data[i] - minPrice) / priceRange) * chartHeight;
+                
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                // رسم القيم
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text');
+                ctx.font = '10px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('$' + data[i].toFixed(3), x, y - 10);
+                ctx.fillStyle = '#001365';
+            }
+            
+            // رسم تسميات المحاور
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text');
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            
+            // تسميات الأشهر
+            for (let i = 0; i < labels.length; i++) {
+                const x = padding + (i / (labels.length - 1)) * chartWidth;
+                const y = padding + 40 + chartHeight + 20;
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(-Math.PI / 4);
+                ctx.fillText(labels[i], 0, 0);
+                ctx.restore();
+            }
+            
+            // تسميات الأسعار
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 5; i++) {
+                const price = minPrice + (i / 5) * priceRange;
+                const y = padding + 40 + (1 - i / 5) * chartHeight;
+                ctx.fillText('$' + price.toFixed(3), padding - 10, y + 3);
+            }
+        }
+
+        // الحصول على تسميات الأشهر
+        function getMonthLabels() {
+            const months = [
+                'january', 'february', 'march', 'april',
+                'may', 'june', 'july', 'august',
+                'september', 'october', 'november', 'december'
+            ];
+            return months.map(month => translations[currentLanguage][month]);
+        }
+
+        // تطبيق الترجمة
+        function applyTranslation() {
+            const lang = currentLanguage;
+            const isRTL = lang === 'ar';
+            
+            // تغيير اتجاه الصفحة
+            document.documentElement.setAttribute('lang', lang);
+            document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+            document.body.className = document.body.className.replace(/\b(rtl|ltr)-mode\b/g, '');
+            document.body.classList.add(isRTL ? 'rtl-mode' : 'ltr-mode');
+            
+            // ترجمة النصوص
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // ترجمة placeholders
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[lang][key]) {
+                    element.placeholder = translations[lang][key];
+                }
+            });
+            
+            // تحديث نص زر اللغة
+            document.getElementById('langText').textContent = translations[lang]['lang-button'];
+            
+            // تحديث الرسم البياني
+            initChart();
+            
+            // تحديث عنوان الصفحة
+            document.title = translations[lang]['dashboard-title'];
+        }
+
+        // تبديل اللغة
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+            applyTranslation();
+            localStorage.setItem('selectedLanguage', currentLanguage);
+            
+            // التأكد من عدم اختفاء السعر عند تغيير اللغة
+            updatePriceDisplay();
+        }
+
+        // وظيفة تبديل الوضع المظلم
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+            // إعادة رسم الخط البياني مع الألوان الجديدة
+            setTimeout(initChart, 100);
+        }
+
+        // متغير لحفظ السعر الحالي
+        let currentPriceValue = 0.07955;
+
+        // تحديث عرض السعر
+        function updatePriceDisplay() {
+            const priceElement = document.getElementById('currentPrice');
+            if (priceElement) {
+                priceElement.textContent = `$${currentPriceValue.toFixed(5)}`;
+            }
+        }
+
+        // محاكاة تحديث السعر
+        function simulatePriceUpdate() {
+            currentPriceValue = currentPriceValue + (Math.random() * 0.002 - 0.001);
+            updatePriceDisplay();
+        }
+
+        // تسجيل المحفظة (العقد القديم)
+        const OLD_DISTRIBUTION_CONTRACT_ADDRESS = "0x672d85615539f3E91f5a2e919148A9372E809a54";
+
+        document.getElementById("registrationForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const walletAddress = document.getElementById("walletAddress").value.trim();
+
+            // التحقق من صحة العنوان (تحقق بسيط)
+            if (!/^0x[a-fA-F0-9]{40}$/.test(walletAddress)) {
+                showMessage(translations[currentLanguage]['invalid-address'], true);
+                return;
+            }
+
+            try {
+                showMessage(translations[currentLanguage]['success-message']);
+            } catch (error) {
+                console.error("خطأ أثناء الإرسال:", error);
+                showMessage(translations[currentLanguage]['error-message'], true);
+            }
+        });
+
+        // منطق زيادة السيولة الجديد
+        const LIQUIDITY_CAMPAIGN_CONTRACT_ADDRESS = "0x..."; // **يجب استبدال هذا بالعنوان الفعلي لعقد LiquidityCampaign**
+        const USDT_CONTRACT_ADDRESS = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F";
+
+        document.getElementById("approveUSDTBtn").addEventListener("click", async () => {
+            showLiquidityMessage("يرجى تثبيت MetaMask أو محفظة متوافقة مع Web3 لاستخدام هذه الميزة.", true);
+        });
+
+        document.getElementById("depositLiquidityBtn").addEventListener("click", async () => {
+            showLiquidityMessage("يرجى تثبيت MetaMask أو محفظة متوافقة مع Web3 لاستخدام هذه الميزة.", true);
+        });
+
+        function showMessage(message, isError = false) {
+            const messageDiv = document.getElementById("message");
+            messageDiv.textContent = message;
+            messageDiv.className = isError ? "message error" : "message";
+        }
+
+        function showLiquidityMessage(message, isError = false) {
+            const messageDiv = document.getElementById("liquidityMessage");
+            messageDiv.textContent = message;
+            messageDiv.className = isError ? "message error" : "message";
+        }
+
+        // نسخ عنوان العقد الذكي
+        function copyContractAddress() {
+            const contractSpan = document.getElementById("contractAddress");
+            const fullAddress = contractSpan.dataset.full;
+            navigator.clipboard.writeText(fullAddress).then(() => {
+                alert(translations[currentLanguage]['copy-success'] + " " + fullAddress);
+            }).catch(err => {
+                console.error(translations[currentLanguage]['copy-error'], err);
+            });
+        }
+
+        // تهيئة التطبيق
+        document.addEventListener('DOMContentLoaded', () => {
+            // تحميل تفضيلات المستخدم
+            const savedLanguage = localStorage.getItem('selectedLanguage');
+            if (savedLanguage) {
+                currentLanguage = savedLanguage;
+            }
+            
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+            
+            // تطبيق الترجمة الأولية
+            applyTranslation();
+            
+            // بدء تحديث السعر
+            updatePriceDisplay();
+            priceUpdateInterval = setInterval(simulatePriceUpdate, 30000); // كل 30 ثانية
+            
+            // إعادة رسم الخط البياني عند تغيير حجم النافذة
+            window.addEventListener('resize', () => {
+                setTimeout(initChart, 100);
+            });
+        });
+    </script>
+</body>
+</html>
+
